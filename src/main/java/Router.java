@@ -6,27 +6,27 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 
-public class Server {
+public class Router {
     public static void main(String[] args) throws IOException {
 
-        System.out.println("Server Started.");
+        System.out.println("Router Started.");
         int portNumber = 5000;
 
         try (
-                ServerSocket serverSocket = new ServerSocket(portNumber);
-                Socket clientSocket = serverSocket.accept();
+                ServerSocket brokerSocket = new ServerSocket(portNumber);
+                Socket clientSocket = brokerSocket.accept();
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         ) {
-            System.out.println("Client Connected.");
+            System.out.println("Broker Connected.");
 
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 out.println(inputLine);
-                System.out.println("Client: " + inputLine);
+                System.out.println("Broker: " + inputLine);
             }
         } catch (IOException e) {
-            System.out.println("Exception caught when trying to listen on port "
+            System.out.println("Router: Exception caught when trying to listen on port "
                     + portNumber + " or listening for a connection");
             System.out.println(e.getMessage());
         }
