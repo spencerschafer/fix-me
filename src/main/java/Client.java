@@ -7,9 +7,12 @@ import java.io.*;
 import java.net.*;
 
 public class Client {
+
+    //netstat -f inet -n | grep .5000
     public static void main(String[] args) throws IOException {
 
-        String hostName = "Localhost";
+        System.out.println("Client Started.");
+        String hostName = "localhost";
         int portNumber = 5000;
 
         try (
