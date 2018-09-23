@@ -6,30 +6,29 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Market {
+    private static final int MARKET_PORT = 5001;
+    private static final String HOSTNAME = "localhost";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         System.out.println("Market Started.");
-        String hostName = "localhost";
-        int portNumber = 5001;
+        try {
+            Socket marketSocket = new Socket(HOSTNAME, MARKET_PORT);
+            PrintWriter output = new PrintWriter(marketSocket.getOutputStream(), true);
+            BufferedReader input = new BufferedReader(new InputStreamReader(marketSocket.getInputStream()));
+            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 
-        try (
-                Socket marketSocket = new Socket(hostName, portNumber);
-//                PrintWriter out = new PrintWriter(marketSocket.getOutputStream(), true);
-//                BufferedReader in = new BufferedReader(new InputStreamReader(marketSocket.getInputStream()));
-//                BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))
-        ) {
-//            String userInput;
-//            while ((userInput = stdIn.readLine()) != null) {
-//                out.println(userInput);
-//                System.out.println("Broker: " + in.readLine());
-//            }
+            String userInput;
+            while ((userInput = stdIn.readLine()) != null) {
+                output.println(userInput);
+                System.out.println("Router: " + input.readLine());
+            }
         } catch (UnknownHostException e) {
-            System.err.println("Market: Don't know about host " + hostName);
+            System.err.println("Market: Don't know about host " + HOSTNAME);
             System.exit(1);
         } catch (IOException e) {
-            System.err.println("Market: Couldn't get I/O for the connection to " +
-                    hostName);
+            System.err.println("Market: Couldn't get I/O for the connection to " + HOSTNAME);
+            e.printStackTrace();
             System.exit(1);
         }
     }

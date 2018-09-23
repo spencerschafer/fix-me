@@ -1,33 +1,44 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 
 public class Router {
-    public static void main(String[] args) throws IOException {
+    private static final int BROKER_PORT = 5000;
+    private static final int MARKET_PORT = 5001;
 
+
+    public static void main(String[] args) {
         System.out.println("Router Started.");
-        int portNumber = 5000;
-
-        try (
-                ServerSocket brokerSocket = new ServerSocket(portNumber);
-                Socket clientSocket = brokerSocket.accept();
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        ) {
+        try {
+            ServerSocket brokerServerSocket = new ServerSocket(BROKER_PORT);
+            Socket brokerSocket = brokerServerSocket.accept();
             System.out.println("Broker Connected.");
 
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                out.println(inputLine);
-                System.out.println("Broker: " + inputLine);
+            ServerSocket marketServerSocket = new ServerSocket(MARKET_PORT);
+            Socket marketSocket = marketServerSocket.accept();
+            System.out.println("Market Connected.");
+
+
+            PrintWriter brokerOutput = new PrintWriter(brokerSocket.getOutputStream(), true);
+            BufferedReader brokerInput = new BufferedReader(new InputStreamReader(brokerSocket.getInputStream()));
+
+            PrintWriter marketOutput = new PrintWriter(marketSocket.getOutputStream(), true);
+            BufferedReader marketInput = new BufferedReader(new InputStreamReader(marketSocket.getInputStream()));
+            String brokerInputLine;
+            String marketInputLine;
+            while ((brokerInputLine = brokerInput.readLine()) != null && (marketInputLine = marketInput.readLine()) != null) {
+                System.out.println("-");
+                brokerOutput.println(brokerInputLine);
+                System.out.println("Broker: " + brokerInputLine);
+                marketOutput.println(marketInputLine);
+                System.out.println("Market: " + marketInputLine);
+                System.out.println("--");
             }
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             System.out.println("Router: Exception caught when trying to listen on port "
-                    + portNumber + " or listening for a connection");
+                    + BROKER_PORT + " or listening for a connection");
             System.out.println(e.getMessage());
         }
     }
