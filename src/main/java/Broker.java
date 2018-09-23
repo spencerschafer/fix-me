@@ -14,14 +14,16 @@ public class Broker {
         System.out.println("Broker Started.");
         try {
             Socket brokerSocket = new Socket(HOSTNAME, BROKER_PORT);
+
+            //input
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+            //output
             PrintWriter output = new PrintWriter(brokerSocket.getOutputStream(), true);
-            BufferedReader input = new BufferedReader(new InputStreamReader(brokerSocket.getInputStream()));
-            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 
             String userInput;
-            while ((userInput = stdIn.readLine()) != null) {
+            while ((userInput = input.readLine()) != null) {
                 output.println(userInput);
-                System.out.println("Router: " + input.readLine());
             }
         } catch (UnknownHostException e) {
             System.err.println("Broker: Don't know about host " + HOSTNAME);

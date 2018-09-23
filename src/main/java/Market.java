@@ -14,14 +14,17 @@ public class Market {
         System.out.println("Market Started.");
         try {
             Socket marketSocket = new Socket(HOSTNAME, MARKET_PORT);
-            PrintWriter output = new PrintWriter(marketSocket.getOutputStream(), true);
-            BufferedReader input = new BufferedReader(new InputStreamReader(marketSocket.getInputStream()));
-            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 
-            String userInput;
-            while ((userInput = stdIn.readLine()) != null) {
-                output.println(userInput);
-                System.out.println("Router: " + input.readLine());
+            //input
+            PrintWriter output = new PrintWriter(System.out, true);
+
+            //output
+            BufferedReader input = new BufferedReader(new InputStreamReader(marketSocket.getInputStream()));
+
+            String marketInput;
+            while((marketInput = input.readLine()) != null) {
+                System.out.print("Messaged received from Router: ");
+                output.println(marketInput);
             }
         } catch (UnknownHostException e) {
             System.err.println("Market: Don't know about host " + HOSTNAME);
