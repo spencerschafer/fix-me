@@ -1,20 +1,23 @@
+package Router;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 
 
 public class Router {
+    private static int ID = 0;
+//    private HashMap<Integer;
     private static final int BROKER_PORT = 5000;
     private static final int MARKET_PORT = 5001;
-
 
     public static void main(String[] args) {
         System.out.println("Router Started.");
         try {
             ServerSocket brokerServerSocket = new ServerSocket(BROKER_PORT);
             Socket brokerSocket = brokerServerSocket.accept();
-            System.out.println("Broker Connected.");
-
+            System.out.println(brokerServerSocket.toString() + " Connected.");
 
             ServerSocket marketServerSocket = new ServerSocket(MARKET_PORT);
             Socket marketSocket = marketServerSocket.accept();
@@ -37,7 +40,7 @@ public class Router {
             String brokerInputLine;
             while ((brokerInputLine = brokerSocketInput.readLine()) != null) {
                 serverSocketOutput.println(brokerInputLine);
-                System.out.println("Message sent to Market: " + brokerInputLine);
+                System.out.println("Broker1 Message sent to Market: " + brokerInputLine);
             }
         }
          catch (Exception e) {
