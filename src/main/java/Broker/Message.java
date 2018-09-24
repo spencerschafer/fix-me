@@ -42,7 +42,7 @@ class Message {
             System.exit(4);
         }
 
-        FIX_MESSAGE = new Checksum(MARKET_ID, INSTRUMENT, QUANTITY, PRICE, ORDER).getMessage();
+        FIX_MESSAGE = new CreateChecksum(MARKET_ID, INSTRUMENT, QUANTITY, PRICE, ORDER).getMessage();
     }
 
     String getMessage() {

@@ -1,11 +1,11 @@
 package Broker;
 
-class Checksum {
+class CreateChecksum {
 
     private String FIX_MESSAGE;
     private int CHECKSUM;
 
-    Checksum(String MARKET_ID, String INSTRUMENT, int QUANTITY, int PRICE, String ORDER) {
+    CreateChecksum(String MARKET_ID, String INSTRUMENT, int QUANTITY, int PRICE, String ORDER) {
 
         FIX_MESSAGE = MARKET_ID + "|" + INSTRUMENT + "|" + QUANTITY + "|" + PRICE + "|" + ORDER + "|";
 

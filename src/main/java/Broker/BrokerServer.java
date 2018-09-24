@@ -17,7 +17,7 @@ class BrokerServer {
             brokerSocket = new Socket(HOSTNAME, BROKER_PORT);
             System.out.println("Broker Started.");
         } catch (IOException e) {
-            System.err.println("Unable to established a connection to " + HOSTNAME + " on port: " + BROKER_PORT);
+            System.err.println("Broker was unable to established a connection to " + HOSTNAME + " on port: " + BROKER_PORT);
             System.exit(5000);
         }
 
@@ -25,7 +25,7 @@ class BrokerServer {
             PrintWriter output = new PrintWriter(brokerSocket.getOutputStream(), true);
             output.println(FIX_MESSAGE);
         } catch (IOException e) {
-            System.err.println("Unable to create PrintWriter in class BrokerServer");
+            System.err.println("Broker was unable to create PrintWriter in class BrokerServer");
             System.exit(5000);
         }
     }
