@@ -13,7 +13,6 @@ class ValidateChecksum {
 		for (char character : message.toCharArray()) {
 			checksum += character;
 		}
-
 		checksum %= 256;
 	}
 

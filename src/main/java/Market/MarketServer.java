@@ -29,8 +29,8 @@ class MarketServer {
 			//output
 			BufferedReader input = new BufferedReader(new InputStreamReader(marketSocket.getInputStream()));
 
-			String marketInput = input.readLine();
 			//validating checksum
+			String marketInput = input.readLine();
 			try {
 				if (!(new ValidateChecksum(marketInput).validateChecksum())) {
 					throw new IOException();
