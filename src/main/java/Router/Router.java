@@ -3,10 +3,9 @@ package Router;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
 
 
-public class Router {
+class Router {
     private static int ID = 0;
 //    private HashMap<Integer;
     private static final int BROKER_PORT = 5000;

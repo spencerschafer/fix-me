@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Market {
+class Market {
     private static final int MARKET_PORT = 5001;
     private static final String HOSTNAME = "localhost";
 

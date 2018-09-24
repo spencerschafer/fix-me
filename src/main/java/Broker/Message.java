@@ -3,47 +3,46 @@ package Broker;
 class Message {
 
     private String FIX_MESSAGE;
-    private String instrument;
-    private String order;
-    private String market_ID;
-    private int quantity;
-    private int price;
+    private String INSTRUMENT;
+    private String ORDER;
+    private String MARKET_ID;
+    private int QUANTITY;
+    private int PRICE;
 
     //Usage: <MARKET_ID> <INSTRUMENT> <QUANTITY <PRICE> <BUY> or <SELL>
     Message(String[] args) {
 
-        market_ID = args[0].toUpperCase();
-        instrument = args[1].toUpperCase();
+        MARKET_ID = args[0].toUpperCase();
+        INSTRUMENT = args[1].toUpperCase();
 
         try {
-            quantity = Integer.parseInt(args[2]);
+            QUANTITY = Integer.parseInt(args[2]);
         } catch (Exception e) {
-            System.err.println("Invalid quantity.(" + quantity+ ").");
+            System.err.println("Invalid quantity.(" + QUANTITY+ ").");
             System.out.println("Usage: <MARKET_ID> <INSTRUMENT> <QUANTITY <PRICE> <BUY> or <SELL>");
             System.exit(2);
         }
 
         try {
-            price = Integer.parseInt(args[3]);
+            PRICE = Integer.parseInt(args[3]);
         } catch (Exception e) {
-            System.err.println("Invalid price (" + price + ").");
+            System.err.println("Invalid price (" + PRICE + ").");
             System.out.println("Usage: <MARKET_ID> <INSTRUMENT> <QUANTITY <PRICE> <BUY> or <SELL>");
             System.exit(3);
         }
 
         try {
-            order = args[4].toUpperCase();
-            if (!(order.equalsIgnoreCase("BUY") || order.equalsIgnoreCase("SELL"))) {
+            ORDER = args[4].toUpperCase();
+            if (!(ORDER.equalsIgnoreCase("BUY") || ORDER.equalsIgnoreCase("SELL"))) {
                 throw new Exception();
             }
         } catch (Exception e) {
-            System.err.println("Invalid order (" + order + ").");
+            System.err.println("Invalid order (" + ORDER + ").");
             System.out.println("Usage: <MARKET_ID> <INSTRUMENT> <QUANTITY <PRICE> <BUY> or <SELL>");
             System.exit(4);
         }
 
-        FIX_MESSAGE = "[ " + market_ID + " | " + instrument + " | "
-                + quantity + " | " + price + " | " + order + " ]";
+        FIX_MESSAGE = new Checksum(MARKET_ID, INSTRUMENT, QUANTITY, PRICE, ORDER).getMessage();
     }
 
     String getMessage() {
