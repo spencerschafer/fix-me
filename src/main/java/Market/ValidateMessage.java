@@ -32,8 +32,11 @@ class ValidateMessage {
 
 	boolean validateMessage(String instrument, int quantity) {
 		// Checking validity of instrument
-		if (!this.instrument.equals(instrument))
+		if (!this.instrument.equals(instrument)) {
+			System.out.println("Market instrument (" + instrument + ") " +
+					"does not trade requested instrument (" + this.instrument + ").");
 			return false;
+		}
 
 		// Checking whether sufficient quantity is available for BUY / SELL order
 		int tempQuantity = Integer.parseInt(this.quantity);

@@ -44,7 +44,7 @@ class MarketServer {
 				}
 			} catch (IOException e) {
 				System.err.println("Invalid message.");
-				System.exit(5001);
+				System.exit(1);
 			}
 
 			//FIX_MESSAGE = market_ID|instrument|quantity|price|order|checksum|;

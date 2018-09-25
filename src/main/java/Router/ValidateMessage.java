@@ -6,7 +6,6 @@ class ValidateMessage {
 	private int checksumCopy;
 	private int market_ID_Copy;
 
-	//TODO: Validate market_id
 	//FIX_MESSAGE = market_ID|instrument|quantity|price|order|checksum|;
 	ValidateMessage(String FIX_MESSAGE) {
 
