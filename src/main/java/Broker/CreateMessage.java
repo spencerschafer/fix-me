@@ -13,13 +13,16 @@ class CreateMessage {
     //Usage: <market_ID> <instrument> <quantity <price> <BUY> or <SELL>
     CreateMessage(String[] args) {
 
-        market_ID = args[0].toUpperCase();
+        market_ID = args[0];
         instrument = args[1].toUpperCase();
 
         try {
             quantity = Integer.parseInt(args[2]);
+            if (quantity <= 0) {
+            	throw new Exception();
+			}
         } catch (Exception e) {
-            System.err.println("Invalid quantity.(" + args[2] + ").");
+            System.err.println("Invalid quantity(" + args[2] + ").");
             System.out.println("Usage: <market_ID> <instrument> <quantity> <price> <BUY> or <SELL>");
             System.exit(2);
         }

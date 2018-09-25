@@ -12,12 +12,16 @@ class ValidateMessage {
 	//FIX_MESSAGE = market_ID|instrument|quantity|price|order|checksum|;
 	ValidateMessage(String FIX_MESSAGE) {
 
-		String[] message = FIX_MESSAGE.split("\\|");
-
-		this.instrument = message[1];
-		this.quantity = message[2];
-		this.order = message[4];
-		checksum = message[5];
+		try {
+			String[] message = FIX_MESSAGE.split("\\|");
+			this.instrument = message[1];
+			this.quantity = message[2];
+			this.order = message[4];
+			checksum = message[5];
+		} catch (Exception e) {
+			System.err.println("Unable to read message: " + FIX_MESSAGE);
+			System.exit(1);
+		}
 
 		String messageWithoutChecksum = FIX_MESSAGE.substring(0, FIX_MESSAGE.length() - 4);
 		for (char character : messageWithoutChecksum.toCharArray()) {
@@ -35,7 +39,7 @@ class ValidateMessage {
 		int tempQuantity = Integer.parseInt(this.quantity);
 		if (order.equalsIgnoreCase("BUY")) {
 			if (quantity - tempQuantity < 0) {
-				System.err.println("BUY order quantity (" + this.quantity + ")" +
+				System.out.println("BUY order quantity (" + this.quantity + ")" +
 						" exceeds available Market quantity (" + quantity + ").");
 				return false;
 			}
