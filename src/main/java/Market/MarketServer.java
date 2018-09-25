@@ -12,7 +12,7 @@ class MarketServer {
 	private static final String HOSTNAME = "localhost";
 
 
-	MarketServer() {
+	MarketServer(String instrument, int quantity) {
 		Socket marketSocket = null;
 
 		try {
@@ -25,18 +25,16 @@ class MarketServer {
 
 		try {
 			PrintWriter output = new PrintWriter(System.out, true);
-
-			//output
 			BufferedReader input = new BufferedReader(new InputStreamReader(marketSocket.getInputStream()));
 
 			//validating checksum
 			String marketInput = input.readLine();
 			try {
-				if (!(new ValidateChecksum(marketInput).validateChecksum())) {
+				if (!(new ValidateMessage(marketInput).validateMessage(instrument, quantity))) {
 					throw new IOException();
 				}
 			} catch (IOException e) {
-				System.err.println("Invalid ValidateChecksum.");
+				System.err.println("Invalid ValidateMessage.");
 				System.exit(5001);
 			}
 
