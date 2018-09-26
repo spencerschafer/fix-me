@@ -6,7 +6,6 @@ class ValidateMessage {
 	private int checksumCopy;
 	private int market_ID_Copy;
 
-	//FIX_MESSAGE = market_ID|instrument|quantity|price|order|checksum|;
 	ValidateMessage(String FIX_MESSAGE) {
 
 		String[] message = FIX_MESSAGE.split("\\|");
@@ -26,7 +25,6 @@ class ValidateMessage {
 		}
 		checksumCopy %= 256;
 	}
-
 
 	boolean validateChecksum(int market_ID) {
 		if (market_ID_Copy != market_ID) {

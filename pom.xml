@@ -6,8 +6,8 @@
 
     <groupId>fix-me</groupId>
     <artifactId>fix-me</artifactId>
-    <version>1.0</version>
     <packaging>pom</packaging>
+    <version>1.0</version>
 
     <modules>
         <module>src/main/java/Router</module>

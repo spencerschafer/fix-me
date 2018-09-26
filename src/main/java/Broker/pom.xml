@@ -42,7 +42,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>Broker</mainClass>
+                            <mainClass>Broker.Broker</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

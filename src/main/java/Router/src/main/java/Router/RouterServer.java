@@ -28,7 +28,7 @@ class RouterServer {
 			PrintWriter marketOutput = new PrintWriter(table.get(0).getOutputStream(), true);
 			BufferedReader marketInput = new BufferedReader(new InputStreamReader(table.get(0).getInputStream()));
 
-			marketOutput.println(0);
+			marketOutput.println(MARKET_ID);
 			System.out.println("Market Connected.");
 
 			ServerSocket brokerServerSocket = new ServerSocket(BROKER_PORT);
@@ -39,10 +39,8 @@ class RouterServer {
 			PrintWriter brokerOutput = new PrintWriter(table.get(1).getOutputStream(), true);
 			BufferedReader brokerInput = new BufferedReader(new InputStreamReader(table.get(1).getInputStream()));
 
-			brokerOutput.println(1);
+			brokerOutput.println(BROKER_ID);
 			System.out.println("Broker Connected.\n");
-
-
 
 			//validating checksum
 			String brokerInputLine = brokerInput.readLine();

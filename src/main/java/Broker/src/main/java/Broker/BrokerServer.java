@@ -45,8 +45,8 @@ class BrokerServer {
 			}
 
         } catch (IOException e) {
-            System.err.println("Broker was unable to create PrintWriter in class BrokerServer");
-            System.exit(5000);
+            System.err.println("Broker was unable to create PrintWriter in class Broker.BrokerServer");
+            System.exit(1);
         }
     }
 }

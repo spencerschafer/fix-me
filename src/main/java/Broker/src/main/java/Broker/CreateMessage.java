@@ -10,7 +10,6 @@ class CreateMessage {
     private int price;
     private int checksum;
 
-    //Usage: <market_ID> <instrument> <quantity <price> <BUY> or <SELL>
     CreateMessage(String[] args) {
 
         market_ID = args[0];
@@ -22,7 +21,7 @@ class CreateMessage {
             	throw new Exception();
 			}
         } catch (Exception e) {
-            System.err.println("Invalid quantity(" + args[2] + ").");
+            System.err.println("Invalid quantity (" + args[2] + ").");
             System.out.println("Usage: <market_ID> <instrument> <quantity> <price> <BUY> or <SELL>");
             System.exit(2);
         }

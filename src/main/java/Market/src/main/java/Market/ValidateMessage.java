@@ -9,7 +9,6 @@ class ValidateMessage {
 	private String order;
 	private int checksumCopy;
 
-	//FIX_MESSAGE = market_ID|instrument|quantity|price|order|checksum|;
 	ValidateMessage(String FIX_MESSAGE) {
 
 		try {
@@ -31,6 +30,7 @@ class ValidateMessage {
 	}
 
 	boolean validateMessage(String instrument, int quantity) {
+
 		// Checking validity of instrument
 		if (!this.instrument.equals(instrument)) {
 			System.out.println("Market instrument (" + instrument + ") " +
