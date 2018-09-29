@@ -69,7 +69,6 @@ class RouterServer {
 		} catch (Exception e) {
 			System.out.println("Exception caught when trying to listen on port "
 					+ BROKER_PORT + " or listening for a connection");
-			e.printStackTrace();
 			System.exit(1);
 		}
 	}

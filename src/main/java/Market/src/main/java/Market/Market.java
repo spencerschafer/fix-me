@@ -13,7 +13,7 @@ class Market {
 		}
 
 		try {
-			instrument = args[0];
+			instrument = args[0].toUpperCase();
 			quantity = Integer.parseInt(args[1]);
 			if (quantity < 0) {
 				throw new Exception();
